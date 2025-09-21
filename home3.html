@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Temiloluwa Emmannuel</title>
+  <meta name="description" content="Minimal portfolio with blog, skills, and contact via WhatsApp" />
+  <link rel="icon" href="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f4bb.svg" type="image/svg+xml">
+  <style>
+    :root{
+      --bg: #ffffff;
+      --card: #fbfdfb;
+      --text: #0b1320;
+      --muted: #5b6b63;
+      --accent: #0fa57f; /* green */
+      --glass: rgba(15,165,127,0.06);
+      --shadow: 0 6px 18px rgba(11,19,32,0.06);
+      --radius: 14px;
+      --transition: 300ms cubic-bezier(.2,.9,.3,1);
+    }
+    [data-theme="dark"]{
+      --bg: #081016;
+      --card: #07121a;
+      --text: #e6f4ef;
+      --muted: #98b7a9;
+      --accent: #3bd69e;
+      --glass: rgba(255,255,255,0.03);
+      --shadow: 0 8px 26px rgba(0,0,0,0.6);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:linear-gradient(180deg,var(--bg),var(--card));
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      transition:background var(--transition), color var(--transition);
+      line-height:1.45;
+      padding:32px;
+    }
+    .wrap{max-width:1100px;margin:0 auto}
+
+    header{
+      display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px
+    }
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{
+      width:48px;height:48px;border-radius:12px;background:var(--glass);display:grid;place-items:center;font-weight:700;color:var(--accent);box-shadow:var(--shadow);
+    }
+    .nav{display:flex;gap:18px;align-items:center}
+    .nav a{color:var(--muted);text-decoration:none;font-weight:600;padding:8px;border-radius:10px;transition:all var(--transition)}
+    .nav a:hover{color:var(--text);background:var(--glass)}
+    .cta{display:inline-flex;gap:8px;align-items:center;background:linear-gradient(90deg,var(--accent),#08b987);color:#fff;padding:10px 14px;border-radius:12px;text-decoration:none;font-weight:700;box-shadow:var(--shadow)}
+
+    main{display:grid;grid-template-columns:1fr 360px;gap:28px}
+    @media (max-width:980px){main{grid-template-columns:1fr;margin-top:16px}header{flex-direction:row;}
+      .nav{display:none}
+    }
+
+    .hero{background:var(--card);padding:28px;border-radius:var(--radius);box-shadow:var(--shadow);transition:transform var(--transition)}
+    .hero h1{margin:0;font-size:28px}
+    .sub{color:var(--muted);margin-top:8px}
+    .skills{margin-top:20px;display:flex;flex-wrap:wrap;gap:10px}
+    .chip{background:transparent;border:1px solid rgba(15,165,127,0.12);padding:8px 12px;border-radius:999px;font-weight:600;color:var(--text)}
+
+    .section{margin-top:22px}
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+    .card{background:var(--card);padding:16px;border-radius:12px;box-shadow:var(--shadow);transition:transform var(--transition);}
+    .card:hover{transform:translateY(-6px)}
+
+    /* Blog list */
+    .blog-list{display:flex;flex-direction:column;gap:14px}
+    .post{display:flex;gap:12px;align-items:flex-start}
+    .post .meta{font-size:13px;color:var(--muted)}
+
+    /* Sidebar */
+    aside{position:sticky;top:28px}
+    .profile{display:flex;gap:12px;align-items:center;padding:16px;border-radius:12px;background:linear-gradient(180deg,var(--card),transparent);box-shadow:var(--shadow)}
+    .avatar{width:72px;height:72px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#05a77b);display:grid;place-items:center;color:#fff;font-weight:700;font-size:22px}
+    .small{font-size:13px;color:var(--muted)}
+
+    /* footer */
+    footer{margin-top:32px;text-align:center;color:var(--muted)}
+    .social{display:flex;justify-content:center;gap:18px;margin-top:14px}
+    .social a{color:var(--muted);font-size:20px;transition:color var(--transition)}
+    .social a:hover{color:var(--accent)}
+
+    /* theme toggle */
+    .toggle{background:var(--glass);border-radius:999px;padding:6px;display:inline-flex;gap:6px;align-items:center}
+    .toggle button{background:transparent;border:0;padding:6px;border-radius:999px;cursor:pointer}
+
+    /* search/blog header */
+    .search{display:flex;gap:8px;align-items:center;border-radius:12px;padding:8px;background:var(--card);box-shadow:var(--shadow)}
+    input[type="search"]{background:transparent;border:0;outline:none;color:var(--text);font-weight:600}
+
+    /* subtle animations */
+    .fade-in{animation:fade .6s both}
+    @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+    /* simple markdown-like content for blog post page (if expanded) */
+    .prose p{color:var(--muted);margin:0 0 12px}
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body data-theme="light">
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">TEO</div>
+        <div>
+          <div style="font-weight:800">Temiloluwa Emmannuel</div>
+          <div class="small">Frontend & Web Developer</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#whyhire">Why Hire Me</a>
+        <a href="#projects">Projects</a>
+        <a href="#blog">Blog</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div style="display:flex;gap:12px;align-items:center">
+        <div class="toggle" aria-hidden>
+          <button id="themeBtn" title="Toggle theme">☼</button>
+        </div>
+        <a class="cta" href="https://wa.me/2349041158490?text=Hi%20there!%20I%27d%20like%20to%20work%20with%20you." target="_blank" rel="noopener noreferrer">Text me</a>
+      </div>
+    </header>
+
+    <main>
+      <section>
+        <div class="hero fade-in">
+          <h1>Hi — I’m <span style="color:var(--accent)">Temiloluwa Emmannuel</span></h1>
+          <p class="sub">I build clean, accessible, and fast web experiences. I focus on minimal design, good performance, and delightful interactions.</p>
+
+          <div class="section">
+            <h3 style="margin:0 0 8px 0">Featured Projects</h3>
+            <div class="cards">
+              <article class="card">
+                <h4 style="margin:0">Hospital Management System</h4>
+                <p class="small">Hospital Management System – A digital platform built with HTML, CSS, JavaScript, and MongoDB, deployed on Render. It was developed to replace outdated paper-based processes, reducing financial loss, appointment errors, ward misplacements, and equipment miscounts. The system introduces a modern digital workflow that improves efficiency for hospitals and provides patients with a more reliable healthcare experience, while also showcasing the hospital’s ability to handle advanced medical cases.</p>
+              </article>
+              <article class="card">
+                <h4 style="margin:0">Home Decor Management System</h4>
+                <p class="small">Home Decor Management System – A web-based solution designed with HTML, CSS, JavaScript, and MongoDB to simplify interior design and decor planning. It helps users manage decor items, track budgets, and visualize design layouts digitally, moving away from scattered manual processes. The system reduces errors, ensures better inventory control, and provides clients with a more professional, organized, and enjoyable decor experience. </p>
+            </div>
+          </div>
+
+          <div id="skills" class="section">
+            <h3 style="margin:0 0 8px 0">Skills</h3>
+            <div class="skills">
+              <span class="chip">HTML</span>
+              <span class="chip">CSS</span>
+              <span class="chip">JavaScript</span>
+              <span class="chip">React</span>
+              <span class="chip">Tailwind</span>
+              <span class="chip">Node.js</span>
+              <span class="chip">Git</span>
+                <span class="chip">Figma</span>
+                <span class="chip">Java</span>
+                <span class="chip">BootStrap</span>
+            </div>
+          </div>
+
+          <div id="whyhire" class="section card fade-in">
+            <h3 style="margin:0 0 8px 0">Why Hire Me?</h3>
+            <p class="small">I don’t just write code — I solve problems. My focus is on building products that are not only functional but also intuitive and enjoyable for people to use.</p>
+            <p class="small">I communicate clearly, adapt quickly, and care about details. Whether it’s collaborating with a team or working independently, I stay committed to delivering quality work on time.</p>
+            <p class="small">Most importantly, I approach every project with curiosity and a growth mindset. If I don’t know something today, I’ll learn it by tomorrow to make sure your vision is achieved.</p>
+          </div>
+
+        </div>
+
+        <div id="blog" class="section">
+          <h3>Latest Posts</h3>
+          <div class="blog-list">
+            <article class="post card">
+              <div style="flex:1">
+                <a href="#" style="font-weight:800;color:var(--text);text-decoration:none">How I structure a small web project</a>
+                <div class="meta">Sep 1, 2025 · 5 min read</div>
+                <p class="small" style="margin-top:8px">An approachable guide for setting up a project with good defaults for performance and accessibility.</p>
+              </div>
+            </article>
+
+            <article class="post card">
+              <div style="flex:1">
+                <a href="#" style="font-weight:800;color:var(--text);text-decoration:none">Design tokens for tiny teams</a>
+                <div class="meta">Aug 21, 2025 · 3 min read</div>
+                <p class="small" style="margin-top:8px">How to use CSS variables and smart defaults to keep your UI consistent.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+
+      </section>
+
+      <aside>
+        <div class="profile fade-in">
+          <div class="avatar">TEO</div>
+          <div>
+            <div style="font-weight:800">Temiloluwa Emmanuel</div>
+            <div class="small">Frontend Developer · Open to work</div>
+            <div style="margin-top:10px">
+              <a class="cta" href="https://wa.me/2349041158490?text=Hi%20I%27d%20like%20to%20talk%20about%20a%20project" target="_blank" rel="noopener noreferrer" style="padding:8px 10px;font-size:14px">Contact on WhatsApp</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="section card">
+          <h4 style="margin:0 0 8px 0">Contact</h4>
+          <p class="small">Prefer WhatsApp? Tap the button below to message me directly.</p>
+          <div style="margin-top:10px">
+            <a class="cta" href="https://wa.me/2349041158490?text=Hello%20there!" target="_blank" rel="noopener noreferrer">Start Chat</a>
+          </div>
+        </div>
+
+        <div class="section card">
+          <h4 style="margin:0 0 8px 0">Download CV</h4>
+          <p class="small">link to my CV </p>
+          <div style="margin-top:10px">
+            <a class="chip" href="#">Download</a>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <div class="small">© <span id="year"></span> Temiloluwa Emmanuel — Built with care. • <a href="#" style="color:var(--muted)">Privacy</a></div>
+      <div class="social">
+        <a href="https://github.com/darkmonarch123" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/yourprofile" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://twitter.com/yourprofile" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="https://wa.me/2349041158490" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // set year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // theme persistence
+    const root = document.documentElement;
+    const body = document.body;
+    const themeBtn = document.getElementById('themeBtn');
+    const stored = localStorage.getItem('theme');
+    if(stored) body.setAttribute('data-theme', stored);
+    function toggleTheme(){
+      const cur = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      body.setAttribute('data-theme', cur);
+      localStorage.setItem('theme', cur);
+      themeBtn.textContent = cur === 'dark' ? '☾' : '☼';
+    }
+    themeBtn.addEventListener('click', toggleTheme);
+    // set initial icon
+    themeBtn.textContent = body.getAttribute('data-theme') === 'dark' ? '☾' : '☼';
+
+    // simple keyboard shortcut: t => toggle theme
+    window.addEventListener('keydown', (e)=>{ if(e.key.toLowerCase()==='t') toggleTheme(); });
+
+    // Smooth scroll for nav
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const href = a.getAttribute('href');
+        if(href.startsWith('#')){
+          e.preventDefault();
+          const el = document.querySelector(href);
+          if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+        }
+      })
+    });
+
+    console.log('Portfolio loaded — WhatsApp contact: +2349041158490');
+  </script>
+</body>
+</html>
